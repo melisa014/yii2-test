@@ -1,14 +1,21 @@
 
-Options +FollowSymLinks
-IndexIgnore */*
-RewriteEngine on
- 
-# Если запрос не начинается с web, добавляем его
-RewriteCond %{REQUEST_URI} !^/(web)
-RewriteRule (.*) /web/$1
- 
-# Если файл или каталог не существует, идём к /web/index.php 
+RewriteEngine On
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /web/index.php
+RewriteRule ^(.*)\?*$ index.php?r=$1 [L,QSA]
 
+
+
+# Options +FollowSymLinks
+# IndexIgnore */*
+# RewriteEngine on
+
+# Если запрос не начинается с web, добавляем его
+# RewriteCond %{REQUEST_URI} !^/(web)
+# RewriteRule (.*) /web/$1
+
+# Если файл или каталог не существует, идём к /web/index.php 
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule . /web/index.php
