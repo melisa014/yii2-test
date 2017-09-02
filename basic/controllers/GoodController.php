@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use yii\web\Controller;
-use yii\models\Good;
+use app\models\Good;
 
 /**
  *
@@ -13,7 +13,10 @@ class GoodController extends Controller
 {
     public function actionView($id)
     {
-        $model = Good::findOne($id);
+        $model = Good::find()
+                ->where('id')
+                
+                ;
         if ($model === null) {
             throw new NotFoundHttpException;
         }
@@ -40,6 +43,13 @@ class GoodController extends Controller
     
     public function actionArchive()
     {
+        $goods = Good::find()->all();
         
+        if ($goods === null) {
+            throw new NotFoundHttpException;
+        }
+         return $this->render('archive', [
+            'model' => $goods,
+        ]);
     }
 }

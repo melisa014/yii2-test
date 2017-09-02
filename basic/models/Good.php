@@ -8,5 +8,18 @@ use yii\db\ActiveRecord;
  */
 class Good extends ActiveRecord
 {
+    public static function tableName()
+    {
+        return 'goods';
+    }
+    
+    public function rules()
+    {
+        return [
+            [['price', 'name'], 'required'],
+            [['name'], 'unique'],
+        ];
+    }
+    
     
 }
