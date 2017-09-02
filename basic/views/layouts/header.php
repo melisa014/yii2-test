@@ -19,8 +19,7 @@
 
 <!-- Это блок навигации по сайту -->
         <p>
-            <a href="/index.php">На домашнюю страницу</a>
-            <a href="<?= Url::to("good/archive")?>">В архив</a>
+            <a href="<?= Url::to("good/index")?>">На домашнюю страницу</a>
             <a href="<?= Url::to("login/index")?>">Войти под своим именем</a>
 
 
@@ -46,17 +45,17 @@
         </p>
        
 <!-- Это блок данных о пользователе и для пользователя-->
-        <p>
-            <?= \core\User::get()->userName . ' ' ?><br>
-            <span id="sessionLikesCount">Понравилось: <?= \core\Session::get()->session['user']['userSessionLikesCount']?></span><br>
+<!--        <p>
+            \core\User::get()->userName . ' ' <br>
+            <span id="sessionLikesCount">Понравилось:  \core\Session::get()->session['user']['userSessionLikesCount']</span><br>-->
 
     <!-- Выводим на экран ссылку на "Мой заказ" для просмотра и подтверждения, и в скобках кол-во заказанных товаров-->
-            <span>
-                <?= \core\User::get()->returnIfAllowed("order/index", 
+<!--            <span>
+                 \core\User::get()->returnIfAllowed("order/index", 
                         "<a href=" . Url::to("order/index") 
-                        . ">Мой заказ</a> (" . (new \application\models\Correction())->getUsersAllGoodsCount() . ")");?>
-            </span><br>
-
+                        . ">Мой заказ</a> (" . (new \application\models\Correction())->getUsersAllGoodsCount() . ")");
+            </span><br>-->
+            
             <a href="<?= Url::to("login/logout")?>">Выйти</a>
         </p>
         
