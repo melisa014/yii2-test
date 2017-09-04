@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 use yii\db\ActiveRecord;
@@ -7,7 +6,7 @@ use yii\db\ActiveRecord;
  *
  * @author qwegram
  */
-class Good extends ActiveRecord
+class GiiGood extends ActiveRecord
 {
     public static function tableName()
     {
