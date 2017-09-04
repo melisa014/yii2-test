@@ -4,19 +4,21 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Country */
+/* @var $model app\models\Good */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="country-form">
+<div class="good-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'population')->textInput() ?>
+    <?= $form->field($model, 'price')->textInput() ?>
+    
+    <?= $form->field($model, 'description')->textInput() ?>
+    
+    <?= $form->field($model, 'available')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

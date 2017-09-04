@@ -1,29 +1,48 @@
 <?php
-//    echo "Hello)";
-//    echo "<pre>";
-//    print_r($model);
-//    echo "</pre>";
-    
-?>
-<?php 
-    use yii\helpers\Html;
 
-   
+use yii\helpers\Html;
+use yii\grid\GridView;
+
+/* @var $this yii\web\View */
+/* @var $searchModel app\models\GoodSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = 'Все товары';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div>
-    <h1><?= Html::encode("Архив товаров") ?></h1>
+<div class="good-index">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <p>
+        <?= Html::a('+ Добавить товар', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
     
-    <ul>
-        <?php foreach($model as $value) :?>
-            <ol> 
-                <?php HTML::beginForm() ?>
-                    <?php HTML::tag('a', $value->name) ?>
-                    <span><?= $value->name; ?></span>
-                    <span>Цена: <?= $value->price; ?></span>
-                    <span>В наличии: <?= $value->available; ?></span>
-                <?php HTML::endForm() ?>    
-            </ol>
-        <?php endforeach; ?>
-    </ul>
-    
-</div>
+    <p>
+        <?php 
+        echo "<pre>";
+        print_r($searchModel);
+        print_r($dataProvider);
+        echo "</pre>";?>
+       
+    </p>
+
+   <!-- <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'name',
+            'description:ntext',
+            'available',
+            'price',
+            'id',
+            // 'likes',
+            // 'reserve',
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?> -->
+   </div>

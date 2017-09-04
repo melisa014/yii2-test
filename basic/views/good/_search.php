@@ -4,22 +4,30 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\CountrySearch */
+/* @var $model app\models\GoodSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="country-search">
+<div class="good-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'code') ?>
-
     <?= $form->field($model, 'name') ?>
 
-    <?= $form->field($model, 'population') ?>
+    <?= $form->field($model, 'description') ?>
+
+    <?= $form->field($model, 'available') ?>
+
+    <?= $form->field($model, 'price') ?>
+
+    <?= $form->field($model, 'id') ?>
+
+    <?php // echo $form->field($model, 'likes') ?>
+
+    <?php // echo $form->field($model, 'reserve') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

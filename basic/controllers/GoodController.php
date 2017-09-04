@@ -2,73 +2,123 @@
 
 namespace app\controllers;
 
-use yii\web\Controller;
+use Yii;
 use app\models\Good;
+use app\models\GoodSearch;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 
 /**
- *
- * @author qwegram
+ * GoodController implements the CRUD actions for Good model.
  */
 class GoodController extends Controller
 {
     /**
-     * Выводит список всех товаров магазина
-     * @throws NotFoundHttpException
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * Lists all Good models.
+     * @return mixed
      */
     public function actionIndex()
     {
-        $goods = Good::find()->all();
-        
-        if ($goods === null) {
-            throw new NotFoundHttpException;
-        }
-         return $this->render('index', [
-            'model' => $goods,
+        $searchModel = new GoodSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
-    
+
     /**
-     * Выводит подробное описание товара на отдельной странице
-     * @throws NotFoundHttpException
+     * Displays a single Good model.
+     * @param integer $id
+     * @return mixed
      */
     public function actionView($id)
     {
-        $model = Good::find()
-                ->where('id')
-                
-                ;
-        if ($model === null) {
-            throw new NotFoundHttpException;
-        }
-
         return $this->render('view', [
-            'model' => $model,
+            'model' => $this->findModel($id),
         ]);
     }
-    
+
     /**
-     * Выводит форму для редактирования товара
+     * Creates a new Good model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
      */
-    public function actionEdit()
+    public function actionCreate()
     {
-        $model = Good::update();
+        $model = new Good();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
     }
-    
+
     /**
-     * Выводит предупреждение об удалении товара
+     * Updates an existing Good model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
      */
-    public function actionDelete()
+    public function actionUpdate($id)
     {
-        
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
     }
-    
+
     /**
-     * Выводит форму для добавления товара (для администратора)
+     * Deletes an existing Good model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
      */
-    public function actionAdd()
+    public function actionDelete($id)
     {
-        
+        $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
     }
-    
-    
+
+    /**
+     * Finds the Good model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Good the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Good::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
 }
