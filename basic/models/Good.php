@@ -19,6 +19,7 @@ class Good extends ActiveRecord
         return [
             [['price', 'name'], 'required'],
             [['name'], 'unique'],
+            [['description', 'available'], 'safe'],
         ];
     }
     

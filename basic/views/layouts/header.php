@@ -64,7 +64,7 @@
         
             <?= $content ?>
             <div id="footer">
-                2017. All rights reserved. I will find you.
+                2017. All rights reserved. 
             </div>
         </div>
     </body>
