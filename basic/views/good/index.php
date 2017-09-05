@@ -16,11 +16,11 @@ $this->title = "Все товары";
     <p>
         <?php foreach($goods as $good) : ?>
              
-            <?= HTML::a($good->name, ['view']) ?><br>
+            <?= Html::a($good->name, ['view?id=' . $good->id]) ?><br>
             <span>Цена: <?= $good->price ?> шт.</span><br>
             <span>В наличии: <?= $good->available ?></span><br>
-            <?= HTML::button('Редактировать', ['update']) ?><br>
-            <?= HTML::button('Удалить', ['delete']) ?><br>
+            <?= Html::button('Редактировать', ['update']) ?><br>
+            <?= Html::button('Удалить', ['delete']) ?><br>
     
         <?php endforeach; ?>
        

@@ -1,5 +1,5 @@
 <?php
-
+use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
 $this->title = "Добавить товар";
@@ -10,23 +10,13 @@ $this->title = "Добавить товар";
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::beginForm(['good/create'], 'post') ?>
-            <?= Html::label('Название товара', 'name', ['class' => 'label name']) ?>
-            <?= Html::input('text', 'name', null, ['placeholder' => 'Введите название товара']) ?><br>
-
-            <?= Html::label('Описание товара', 'description', ['class' => 'label description']) ?>
-            <?= Html::textarea('description', '', [
-                'placeholder' => 'Введите описание товара',
-                'rows' => '3',
-                'cols' => '85',
-                ]) ?><br>
+        <?php $form = ActiveForm::begin(['action' => 'create'])?>
+            <?= $form->field($good, 'name')->label('Название товара')?><br>
+            <?= $form->field($good, 'description')->textarea(['rows' => '3', 'cols' => '85'])->label('Описание товара')?><br>
+            <?= $form->field($good, 'price')->label('Цена')?><br>
+            <?= $form->field($good, 'available')->label('В наличии, шт')?><br>
+            <?= Html::submitButton('Создать')?><br>
             
-            <?= Html::label('Цена товара', 'price', ['class' => 'label price']) ?>
-            <?= Html::input('text', 'price', null, ['placeholder' => 'Введите цену товара']) ?><br>
-
-            <?= Html::label('Товар в наличии', 'available', ['class' => 'label available']) ?>
-            <?= Html::input('text', 'available', null, ['placeholder' => 'Товаров в наличии']) ?><br>
-            <?= Html::submitButton('Сохранить') ?>
-        <?= Html::endForm() ?>     
+        <?php ActiveForm::end()?>
     </p>
 </div>

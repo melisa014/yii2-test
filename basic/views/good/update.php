@@ -16,13 +16,12 @@ $this->title = $good->name;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?php $form = ActiveForm::begin(['action' => ['view?id=' . $good->id]])?>
+        <?php $form = ActiveForm::begin(['action' => 'good/view'])?>
             <?= $form->field($good, 'name')->label('Название товара')?><br>
             <?= $form->field($good, 'description')->textarea(['rows' => '3', 'cols' => '85'])->label('Описание товара')?><br>
             <?= $form->field($good, 'price')->label('Цена')?><br>
             <?= $form->field($good, 'available')->label('В наличии, шт')?><br>
-            <?= Html::submitButton('Сохранить изменения', ['name' => 'saveChanges'])?><br>
-            <?= Html::submitButton('Удалить', ['name'  => 'delete'])?><br>
+            <?= Html::submitButton('Удалить', ['class' => 'btn btn-primary'])?><br>
             
         <?php ActiveForm::end()?>
     </p>
