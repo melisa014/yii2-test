@@ -14,13 +14,13 @@
         <script src="/web/JS/javascript.js"></script>
     </head>
     <body>
-        <h1>Самый лучший сайт</h1>
+        <h1>ЦВЕТЫ ВАШЕЙ ЖИЗНИ</h1>
         <hr></hr>
 
 <!-- Это блок навигации по сайту -->
         <p>
             <a href="<?= Url::toRoute("good/index")?>">На домашнюю страницу</a>
-            <a href="<?= Url::toRoute("login/index")?>">Войти под своим именем</a>
+            <a href="<?= Url::toRoute("login/login")?>">Войти под своим именем</a>
 
 
           

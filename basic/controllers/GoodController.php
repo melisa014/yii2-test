@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Good;
 use yii\web\Controller;
+use yii\data\Pagination;
 
 class GoodController extends Controller
 {
@@ -14,35 +15,50 @@ class GoodController extends Controller
      */
     public function actionIndex()
     {
-        $goods = Good::find()->all();
+        $goods = Good::find(); 
 
+        $pagination = new Pagination([
+            'defaultPageSize' => 3,
+            'totalCount' => $goods->count(),
+        ]);
+        
+        $orderGoods = $goods->orderBy('id')
+                ->offset($pagination->offset)
+                ->limit($pagination->limit)
+                ->all();
+        
         return $this->render('index', [
-            'goods' => $goods,
+            'goods' => $orderGoods,
+            'pagination' => $pagination,
         ]);
     }
     
+    /**
+     * Создание нового товара 
+     */
     public function actionCreate()
     {
         
         $good = new Good();
         
-        if (!empty(Yii::$app->request->post()) 
-                && $good->load(Yii::$app->request->post()) 
-                && $good->validate()) {
-            $good->save();
-//            echo "<pre>";
-//            print_r($good);
-//            echo "</pre>";
-////            die();
-            
-            return $this->redirect(['good/view', 'goodId' => $good->id]);
+        if (!empty(Yii::$app->request->post())){
+            if($good->load(Yii::$app->request->post()) 
+                && $good->validate()
+                && $good->save()){
+                Yii::$app->getSession()->setFlash('create success', 'Запись успешно создана!');
+                return $this->redirect(['good/view', 'goodId' => $good->id]);
+            }
+            else {
+                Yii::$app->getSession()->setFlash('create error', 'Произошла ошибка! Запись не создана!');
+                return $this->redirect(['good/index']);
+            }
         }
-//        echo "hello"; die();
-        else {
-            return $this->render('create', ['good' => $good,]);
-        }
+        return $this->render('create', ['good' => $good,]);
     }
     
+    /**
+     * Просмотр информации о товаре
+     */
     public function actionView($goodId)
     {
         
@@ -54,15 +70,12 @@ class GoodController extends Controller
     }
     
     /**
-     * 1) неявное получение гет-параметров.
-     * 
+     * Обновление данных о товаре
      * @param type $goodId
      * @return type
      */
     public function actionUpdate($goodId)
     {
-     
-            
         $good = Good::findOne($goodId);
         
         if (!empty(Yii::$app->request->post())){
@@ -83,14 +96,12 @@ class GoodController extends Controller
         
     }
     
+    /**
+     * Удаление товара
+     */
     public function actionDelete($goodId)
     {
         $good = Good::findOne($goodId);
-        
-         echo "<pre>";
-            print_r(Yii::$app->request->post());
-            echo "</pre>";
-//            die();
         
         if (!empty(Yii::$app->request->post())){
             if ($good->delete()) { 

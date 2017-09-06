@@ -12,16 +12,15 @@ $this->title = $good->name;
     <p>
         <?= Yii::$app->session->getFlash('update success'); ?>
         <?= Yii::$app->session->getFlash('update error'); ?>
+        <?= Yii::$app->session->getFlash('create success'); ?>
     </p>
     <p>
-        <?php Html::beginForm(['good/view', 'goodId' => $good->id]) ?>
-            <?= Html::encode('Название товара: ' . $good->name) ?><br>
-            <?= Html::encode('Описание товара: ' . $good->description) ?><br>
-            <?= Html::encode('Товаров в наличии: ' . $good->available . 'шт.') ?><br>
-            <?= Html::encode('Цена товара: ' . $good->price) ?><br>
-            <?= Html::a('Редактировать', ['good/update', 'goodId' => $good->id]) ?>
-            <?= Html::a('Назад', ['good/index']) ?>
-        <?php Html::endForm()?>
+        <?= Html::encode('Название товара: ' . $good->name) ?><br>
+        <?= Html::encode('Описание товара: ' . $good->description) ?><br>
+        <?= Html::encode('Товаров в наличии: ' . $good->available . 'шт.') ?><br>
+        <?= Html::encode('Цена товара: ' . $good->price) ?><br>
+        <?= Html::a('Редактировать', ['good/update', 'goodId' => $good->id]) ?>
+        <?= Html::a('Назад', ['good/index']) ?>
     </p>
     
     
