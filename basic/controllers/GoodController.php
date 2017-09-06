@@ -26,11 +26,6 @@ class GoodController extends Controller
         
         $good = new Good();
         
-//        echo "<pre>";
-//        print_r(Yii::$app->request->post());
-//        echo "</pre>";
-//        die();
-        
         if (!empty(Yii::$app->request->post()) 
                 && $good->load(Yii::$app->request->post()) 
                 && $good->validate()) {
@@ -40,7 +35,7 @@ class GoodController extends Controller
 //            echo "</pre>";
 ////            die();
             
-            return $this->redirect(['view?id=' . $good->id]);
+            return $this->redirect(['good/view', 'goodId' => $good->id]);
         }
 //        echo "hello"; die();
         else {
@@ -48,64 +43,65 @@ class GoodController extends Controller
         }
     }
     
-    public function actionView()
+    public function actionView($goodId)
     {
-        echo "<pre>";
-        print_r(Yii::$app->request->post());
-        print_r(Yii::$app->request->get());
-        echo "</pre>";
-//        die();
         
-        $good = Good::findOne(['id' => Yii::$app->request->get('id')]);
+        $good = Good::findOne($goodId); 
         
-        if (!empty(Yii::$app->request->post())){
-            return $this->redirect(['update?id=' . $good->id]);
-        }
-
-        return $this->render('view', [
+                return $this->render('view', [
             'good' => $good,
         ]);
     }
     
-    public function actionUpdate()
+    /**
+     * 1) неявное получение гет-параметров.
+     * 
+     * @param type $goodId
+     * @return type
+     */
+    public function actionUpdate($goodId)
     {
      
-        echo "<pre>";
-        print_r(Yii::$app->request->post());
-        echo "</pre>";
-        die();
             
-        $good = Good::findOne(['id' => Yii::$app->request->get('id')]);
+        $good = Good::findOne($goodId);
         
-        if (!empty(Yii::$app->request->post()) 
-                && $good->load(Yii::$app->request->post()) 
-                && $good->validate()) {
-            $good->save();
-            
-        }
-        else {
-            return $this->render('update', [
-                'good' => $good,
-            ]);
-        }
+        if (!empty(Yii::$app->request->post())){
+            if ($good->load(Yii::$app->request->post()) 
+                && $good->validate()
+                && $good->save()) {
+                Yii::$app->getSession()->setFlash('update success', 'Запись успешно обновлена!');   
+                return $this->redirect(['good/view', 'goodId' => $good->id]);
+            }
+            else {
+                Yii::$app->getSession()->setFlash('update error', 'Произошла ошибка! Запись не обновлена!');
+                return $this->redirect(['good/view', 'goodId' => $good->id]);
+            }
+        } 
+        return $this->render('update', [
+            'good' => $good,
+        ]);
+        
     }
     
-    public function actionDelete()
+    public function actionDelete($goodId)
     {
-        $good = Good::findOne(['id' => Yii::$app->request->get('id')]);
+        $good = Good::findOne($goodId);
         
-            echo "<pre>";
-        print_r(Yii::$app->request->post());
-        print_r(Yii::$app->request->get());
-        print_r($_POST);
-        echo "</pre>";
-//        die();
+         echo "<pre>";
+            print_r(Yii::$app->request->post());
+            echo "</pre>";
+//            die();
         
-        if (!empty(Yii::$app->request->post())) {
-        
-            
+        if (!empty(Yii::$app->request->post())){
+            if ($good->delete()) { 
+                Yii::$app->getSession()->setFlash('delete success', 'Запись успешно удалена!');
+                return $this->redirect(['good/index']);
+            }
+            else {
+                Yii::$app->getSession()->setFlash('delete error', 'Произошла ошибка! Запись не удалена!');
+                return $this->redirect(['good/index']);
+            }
         }
-
         return $this->render('delete', [
                 'good' => $good,
             ]);

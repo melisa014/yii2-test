@@ -1,11 +1,5 @@
 <?php
-use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
-
-//echo "<pre>";
-//print_r($good);
-//echo "</pre>";
-//die();
 
 
 $this->title = $good->name;
@@ -14,17 +8,20 @@ $this->title = $good->name;
 <div class="good-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
+    
     <p>
-        <?php $form = ActiveForm::begin(['action' => ['view?id=' . $good->id]])?>
-            <?= $form->field($good, 'name')->label('Название товара')?><br>
-            <?= $form->field($good, 'description')->textarea(['rows' => '3', 'cols' => '85'])->label('Описание товара')?><br>
-            <?= $form->field($good, 'price')->label('Цена')?><br>
-            <?= $form->field($good, 'available')->label('В наличии, шт')?><br>
-            <?= Html::submitButton('Сохранить изменения', ['name' => 'saveChanges'])?><br>
-            <?= Html::submitButton('Удалить', ['name'  => 'delete'])?><br>
-            
-        <?php ActiveForm::end()?>
+        <?= Yii::$app->session->getFlash('update success'); ?>
+        <?= Yii::$app->session->getFlash('update error'); ?>
+    </p>
+    <p>
+        <?php Html::beginForm(['good/view', 'goodId' => $good->id]) ?>
+            <?= Html::encode('Название товара: ' . $good->name) ?><br>
+            <?= Html::encode('Описание товара: ' . $good->description) ?><br>
+            <?= Html::encode('Товаров в наличии: ' . $good->available . 'шт.') ?><br>
+            <?= Html::encode('Цена товара: ' . $good->price) ?><br>
+            <?= Html::a('Редактировать', ['good/update', 'goodId' => $good->id]) ?>
+            <?= Html::a('Назад', ['good/index']) ?>
+        <?php Html::endForm()?>
     </p>
     
     

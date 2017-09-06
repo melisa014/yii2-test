@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
 
 $this->title = 'Удаление товара';
 ?>
@@ -9,11 +10,11 @@ $this->title = 'Удаление товара';
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?php Html::beginForm('good/delete?id=' . $good->id)?>
+        <?php $form = ActiveForm::begin(['action' => ['good/delete', 'goodId' => $good->id]])?>
             <?= Html::encode('Вы уверены, что хотите удалить данные о товаре?') ?><br>
-            <?= Html::submitButton('Да', ['name' => 'deleteGood', 'value' => 'delete'])?><br>
-            <?= Html::submitButton('Вернуться', ['name' => 'Cancel', 'value' => 'close'])?><br>
-        <?php Html::endForm()?>
+            <?= Html::submitButton('Да')?><br>
+            <?= Html::a('Назад', ['good/update', 'goodId' => $good->id])?><br>
+        <?php ActiveForm::end()?>
     </p>
     
     
