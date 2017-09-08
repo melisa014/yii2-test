@@ -34,7 +34,7 @@ class SiteController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post'],
+                    'logout' => ['get'],
                 ],
             ],
         ];
@@ -54,6 +54,16 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+    /**
+     * Redirects the browser to the home page.
+     * Переопределение метода класса Controller 
+     *
+     * @return Response the current response object
+     */
+    public function goHome()
+    {
+        return Yii::$app->getResponse()->redirect(['good/index']);
     }
 
     /**

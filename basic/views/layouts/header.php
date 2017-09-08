@@ -20,7 +20,7 @@
 <!-- Это блок навигации по сайту -->
         <p>
             <a href="<?= Url::toRoute("good/index")?>">На домашнюю страницу</a>
-            <a href="<?= Url::toRoute("login/login")?>">Войти под своим именем</a>
+            <a href="<?= Url::toRoute("site/login")?>">Войти под своим именем</a>
 
 
           
@@ -56,7 +56,7 @@
                         . ">Мой заказ</a> (" . (new \application\models\Correction())->getUsersAllGoodsCount() . ")");
             </span><br>-->
             
-            <a href="<?= Url::toRoute("login/logout")?>">Выйти</a>
+            <a href="<?= Url::toRoute("site/logout")?>">Выйти</a>
         </p>
         
 <!-- Это начало страницы сайта-->
