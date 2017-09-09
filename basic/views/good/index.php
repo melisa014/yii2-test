@@ -23,8 +23,8 @@ $this->title = "Все товары";
         <?php foreach($goods as $good) : ?>
              
             <?= Html::a($good->name, ['good/view', 'goodId' =>  $good->id]) ?><br>
-            <span>Цена: <?= $good->price ?> шт.</span><br>
-            <span>В наличии: <?= $good->available ?></span><br><br>
+            <span>Цена: <?= $good->price ?> р.</span><br>
+            <span>В наличии: <?= $good->available ?> шт.</span><br><br>
             <hr>
     
         <?php endforeach; ?>
