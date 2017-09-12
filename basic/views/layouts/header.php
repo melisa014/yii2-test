@@ -23,7 +23,7 @@
     <body>
         <?php $this->beginBody();?>
         
-        <a href="<?= Url::toRoute("good/index")?>"><?= Html::img('@web/images/flower1.png', ['alt' => 'Flower']) ?></a>
+        <a href="<?= Url::toRoute("good/index")?>"><?= Html::img('@web/images/flower1.png', ['alt' => 'Flower', 'class' => 'logo']) ?></a>
         <h1>ЦВЕТЫ ВАШЕЙ ЖИЗНИ</h1>
         <hr>
         
