@@ -20,14 +20,16 @@ $this->title = "Все товары";
     </p>
     
     <p>
-        <?php foreach($goods as $good) : ?>
-             
-            <?= Html::a($good->name, ['good/view', 'goodId' =>  $good->id]) ?><br>
-            <span>Цена: <?= $good->price ?> р.</span><br>
-            <span>В наличии: <?= $good->available ?> шт.</span><br><br>
-            <hr>
+        <ul id="headlines">
+            <?php foreach($goods as $good) : ?>
+                <li>
+                    <h2><?= Html::a($good->name, ['good/view', 'goodId' =>  $good->id]) ?></h2>
+                    <span class="summary">Цена: <?= $good->price ?> р.</span><br>
+                    <span class="summary">В наличии: <?= $good->available ?> шт.</span><br><br>
+                </li>
     
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        </ul>
     </p>
     <?= LinkPager::widget(['pagination' => $pagination])?>
 </div>

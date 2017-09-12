@@ -3,7 +3,7 @@
 	body {
 	  margin: 0;
 	  color: #333;
-	  background-color: #00a0b0;
+	  background-color: #D2B48C;
 	  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	  line-height: 1.5em;
           padding-left: 20px;
@@ -18,6 +18,11 @@
 	  -webkit-border-radius: 5px;
 	  border-radius: 5px;
 	}
+        body img {
+            width: 150px;
+            float: left;
+            margin-right: 20px;
+        }
 	 
 	 
 	/* Логотип и нижний колонтитул */
@@ -50,15 +55,17 @@
 	  color: #eb6841;
 	  margin-bottom: 30px;
 	  line-height: 1.2em;
+          font-family: fantasy;
 	}
 	 
 	h2, h2 a {
-	  color: #edc951;
+	  color: #3b2187;
+          font-family: Arial Narrow, sans-serif;
 	}
 	 
-	h2 a {
+/*	h2 a {
 	  text-decoration: none;
-	}
+	}*/
         
         h3.categoryDescription {
 	  margin-top: -20px;

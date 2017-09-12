@@ -1,27 +1,42 @@
 <!DOCTYPE html>
 
 <?php 
+    
+    use Yii;
+    use app\assets\AppAsset;
     use yii\helpers\Url;
+    use yii\helpers\Html;
+    
+    AppAsset::register($this);
+    $this->beginPage();
 ?>
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=windows-1251" />
-        <title>Little-blog</title>
-        <link rel="stylesheet" type="text/css" href="/web/style.css">
-        <script src="/web/JS/jquery-3.2.1.js"></script>
+        <title>Магазин (Yii2)</title>
+        <!--<script src="/web/JS/jquery-3.2.1.js"></script>
         <script src="/web/JS/jquery.validate.js"></script>
         <script src="web/JS/loaderIdentity.js"></script>
-        <script src="/web/JS/javascript.js"></script>
+        <script src="/web/JS/javascript.js"></script> -->
+        <?php $this->head(); ?>
     </head>
     <body>
+        <?php $this->beginBody();?>
+        
+        <a href="<?= Url::toRoute("good/index")?>"><?= Html::img('@web/images/flower1.png', ['alt' => 'Flower']) ?></a>
         <h1>ЦВЕТЫ ВАШЕЙ ЖИЗНИ</h1>
-        <hr></hr>
-
+        <hr>
+        
 <!-- Это блок навигации по сайту -->
         <p>
             <a href="<?= Url::toRoute("good/index")?>">На домашнюю страницу</a>
-            <a href="<?= Url::toRoute("site/login")?>">Войти под своим именем</a>
-
+            <a href="<?= Url::toRoute("site/login")?>">Войти под своим именем</a><br>
+            
+            <?php if (Yii::$app->user->identity) : ?>
+            Приветствуем, <?= Yii::$app->user->identity->username ?>! 
+            <?php endif; ?>
+            
+            <a href="<?= Url::toRoute("site/logout")?>">Выйти</a>
 
           
 <!--//        \core\User::get()->returnIfAllowed("article/add", 
@@ -56,18 +71,20 @@
                         . ">Мой заказ</a> (" . (new \application\models\Correction())->getUsersAllGoodsCount() . ")");
             </span><br>-->
             
-            <a href="<?= Url::toRoute("site/logout")?>">Выйти</a>
+           
         </p>
         
 <!-- Это начало страницы сайта-->
         <div id="container">
         
+            
             <?= $content ?>
             <div id="footer">
                 2017. All rights reserved. 
             </div>
         </div>
+        <?php $this->endBody();?>
     </body>
 </html>
-            
+            <?php $this->endPage(); ?>
            
