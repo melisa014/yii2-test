@@ -17,9 +17,9 @@ class Good extends ActiveRecord
     public function rules()
     {
         return [
-            [['price', 'name'], 'required'],
+            [['price', 'name', 'available'], 'required'],
             [['name'], 'unique'],
-            [['description', 'available'], 'safe'],
+            [['description'], 'safe'],
         ];
     }
     

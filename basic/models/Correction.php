@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models;
 
 use yii\db\ActiveRecord;
@@ -6,19 +7,24 @@ use yii\db\ActiveRecord;
  *
  * @author qwegram
  */
-class GiiGood extends ActiveRecord
+class Correction extends ActiveRecord
 {
     public static function tableName()
     {
-        return 'goods';
+        return 'corrections';
     }
     
     public function rules()
     {
         return [
-            [['price', 'name'], 'required'],
-            [['name'], 'unique'],
+            ['number', 'required'],
         ];
+    }
+    
+    public function getUsersAllGoodsCount()
+    {
+        $this->find();
+                
     }
     
     

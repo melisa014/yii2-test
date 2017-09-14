@@ -6,6 +6,7 @@
     use app\assets\AppAsset;
     use yii\helpers\Url;
     use yii\helpers\Html;
+    use app\components\CartWidget;
     
     AppAsset::register($this);
     $this->beginPage();
@@ -30,7 +31,11 @@
 <!-- Это блок навигации по сайту -->
         <p>
             <a href="<?= Url::toRoute("good/index")?>">На домашнюю страницу</a>
-            <a href="<?= Url::toRoute("site/login")?>">Войти под своим именем</a><br>
+            <a href="<?= Url::toRoute("site/login")?>">Войти под своим именем</a>
+
+            <?php CartWidget::begin(); ?>
+                
+            <?php CartWidget::end(); ?><br>
             
             <?php if (Yii::$app->user->identity) : ?>
             Приветствуем, <?= Yii::$app->user->identity->username ?>! 

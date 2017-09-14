@@ -82,7 +82,10 @@ class GoodController extends Controller
             if ($good->load(Yii::$app->request->post()) 
                 && $good->validate()
                 && $good->save()) {
-                Yii::$app->getSession()->setFlash('update success', 'Запись успешно обновлена!');   
+                Yii::$app->getSession()->setFlash('update success', 'Запись успешно обновлена!');
+                
+                
+                
                 return $this->redirect(['good/view', 'goodId' => $good->id]);
             }
             else {
