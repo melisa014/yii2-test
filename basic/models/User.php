@@ -55,6 +55,11 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
+    
+     public function getOrder()
+    {
+        return $this->hasOne(Order::className(), ['userId' => 'id']);
+    }
 
     /**
      * @inheritdoc

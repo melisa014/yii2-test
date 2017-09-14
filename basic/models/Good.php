@@ -23,5 +23,14 @@ class Good extends ActiveRecord
         ];
     }
     
+    public function getImages()
+    {
+        return $this->hasMany(Image::className(), ['goodId' => 'id']);
+    }
+    
+     public function getCorrectios()
+    {
+        return $this->hasMany(Correction::className(), ['goodId' => 'id']);
+    }
     
 }

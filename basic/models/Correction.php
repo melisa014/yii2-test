@@ -21,6 +21,11 @@ class Correction extends ActiveRecord
         ];
     }
     
+    public function getGood()
+    {
+        return $this->hasMany(Good::className(), ['id' => 'goodId']);
+    }
+    
     public function getUsersAllGoodsCount()
     {
         $this->find();

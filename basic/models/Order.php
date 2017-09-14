@@ -14,4 +14,9 @@ class Order extends ActiveRecord
         return 'orders';
     }
     
+     public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'userId']);
+    }
+    
 }

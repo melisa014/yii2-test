@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Good;
+use app\models\Image;
 use yii\web\Controller;
 use yii\data\Pagination;
 
@@ -40,11 +41,25 @@ class GoodController extends Controller
     {
         
         $good = new Good();
+        $image = new Image();
         
         if (!empty(Yii::$app->request->post())){
             if($good->load(Yii::$app->request->post()) 
                 && $good->validate()
                 && $good->save()){
+                
+                $additionalPath = "basic/web/images/goods/" . $newGood->id;
+                $uploadedFiles = (new FileUploader())->uploadToRelativePath($_FILES, '', $additionalPath);
+                $pathArray = [];
+                foreach ($uploadedFiles as $image) {
+                    $pathArray[] = $image['filepath'];
+                }
+                $image->path = $pathArray;
+//              
+                $image->load(Yii::$app->request->post());
+                $image->goodId = $good->id;
+                $image->save();
+                
                 Yii::$app->getSession()->setFlash('create success', 'Запись успешно создана!');
                 return $this->redirect(['good/view', 'goodId' => $good->id]);
             }
