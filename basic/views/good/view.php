@@ -16,6 +16,12 @@ $this->title = $good->name;
     </p>
     <p>
         <?= Html::encode('Название товара: ' . $good->name) ?><br>
+        
+    <!-- Вывод картинок -->
+        <?php foreach ($good->images as $image) {
+                echo "img src='web/uploads/" . htmlspecialchars($image->path) . "' height='200px'>";
+            } ?><br>
+            
         <?= Html::encode('Описание товара: ' . $good->description) ?><br>
         <?= Html::encode('Товаров в наличии: ' . $good->available . 'шт.') ?><br>
         <?= Html::encode('Цена товара: ' . $good->price) ?><br>

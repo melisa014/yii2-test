@@ -25,7 +25,13 @@ $this->title = "Все товары";
                 <li>
                     <h2><?= Html::a($good->name, ['good/view', 'goodId' =>  $good->id]) ?></h2>
                     <span class="summary">Цена: <?= $good->price ?> р.</span><br>
-                    <span class="summary">В наличии: <?= $good->available ?> шт.</span><br><br>
+                    <span class="summary">В наличии: <?= $good->available ?> шт.</span><br>
+                    
+                <!-- Вывод картинок -->
+                    <?php foreach ($good->images as $image) {
+                            echo "img src='web/uploads/" . htmlspecialchars($image->path) . "' height='200px'>";
+                        }
+                    ?><br><br>
                 </li>
     
             <?php endforeach; ?>

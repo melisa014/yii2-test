@@ -3,12 +3,16 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
+
 /**
  *
  * @author qwegram
  */
 class Image extends ActiveRecord
 {
+    public $imageFile = [];
+    public $imageDescription = [];
+    
     public static function tableName()
     {
         return 'images';
@@ -17,8 +21,9 @@ class Image extends ActiveRecord
     public function rules()
     {
         return [
-            ['path', 'required'],
-            ['description', 'safe'],
+           // [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            ['image-file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+            ['description', 'string'],
         ];
     }
     

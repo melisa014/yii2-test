@@ -7,6 +7,7 @@ use app\models\Good;
 use app\models\Image;
 use yii\web\Controller;
 use yii\data\Pagination;
+use ItForFree\FileUploader;
 
 class GoodController extends Controller
 {
@@ -48,7 +49,7 @@ class GoodController extends Controller
                 && $good->validate()
                 && $good->save()){
                 
-                $additionalPath = "basic/web/images/goods/" . $newGood->id;
+                $additionalPath = "basic/web/images/goods/" . $good->id;
                 $uploadedFiles = (new FileUploader())->uploadToRelativePath($_FILES, '', $additionalPath);
                 $pathArray = [];
                 foreach ($uploadedFiles as $image) {
@@ -68,7 +69,7 @@ class GoodController extends Controller
                 return $this->redirect(['good/index']);
             }
         }
-        return $this->render('create', ['good' => $good,]);
+        return $this->render('create', ['good' => $good, 'image' => $image]);
     }
     
     /**
@@ -92,15 +93,26 @@ class GoodController extends Controller
     public function actionUpdate($goodId)
     {
         $good = Good::findOne($goodId);
+        $image = new Image();
         
         if (!empty(Yii::$app->request->post())){
             if ($good->load(Yii::$app->request->post()) 
                 && $good->validate()
                 && $good->save()) {
+                
+                $additionalPath = "basic/web/images/goods/" . $good->id;
+                $uploadedFiles = (new FileUploader())->uploadToRelativePath($_FILES, '', $additionalPath);
+                $pathArray = [];
+                foreach ($uploadedFiles as $image) {
+                    $pathArray[] = $image['filepath'];
+                }
+                $image->path = $pathArray;
+//              
+                $image->load(Yii::$app->request->post());
+                $image->goodId = $good->id;
+                $image->save();
+                
                 Yii::$app->getSession()->setFlash('update success', 'Запись успешно обновлена!');
-                
-                
-                
                 return $this->redirect(['good/view', 'goodId' => $good->id]);
             }
             else {
@@ -110,6 +122,7 @@ class GoodController extends Controller
         } 
         return $this->render('update', [
             'good' => $good,
+            'image' => $image
         ]);
         
     }
