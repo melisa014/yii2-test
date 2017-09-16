@@ -19,8 +19,8 @@ $this->title = "Добавить товар";
             
             <div class='addImage'>
                 <div id='addedImage' style='display: none'>
-                    <?= $form->field($image, 'imageFile[]')->fileInput()->label('Выберите изображение')?><br>
-                    <?= $form->field($image, 'imageDescription[]')->label('Введите описание изображения')?><br>
+                    <?php //$form->field($image, 'imageFile[]')->fileInput()->label('Выберите изображение')?><br>
+                    <?php// $form->field($image, 'imageDescription[]')->label('Введите описание изображения')?><br>
                 </div>
             </div>
     

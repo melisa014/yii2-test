@@ -18,9 +18,9 @@ class Good extends ActiveRecord
     {
         return [
             [['price', 'name', 'available'], 'required'],
-            [['name'], 'unique'],
-            [['description'], 'safe'],
-            [['images'], 'safe', 'filter' => [$this, 'saveImages']],
+            ['name', 'unique'],
+            ['description', 'string'],
+//            [['images'], 'safe', 'filter' => [$this, 'saveImages']],
         ];
     }
     
@@ -30,15 +30,15 @@ class Good extends ActiveRecord
     * @param array $images
     * @return type
     */
-   static function saveImages($images) {
-       foreach ($images as $image) {
-           $Image = new Image();
-           $Image->load($images);
-           $Image = new Image();
-           
-       }
-
-   }
+//   static function saveImages($images) {
+//       foreach ($images as $image) {
+//           $Image = new Image();
+//           $Image->load($images);
+//           $Image = new Image();
+//           
+//       }
+//
+//   }
     
     public function getImages()
     {

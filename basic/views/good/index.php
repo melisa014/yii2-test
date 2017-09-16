@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
+use yii\widgets\ActiveForm;
 
 $this->title = "Все товары";
 ?>
@@ -32,6 +33,10 @@ $this->title = "Все товары";
                             echo "img src='web/uploads/" . htmlspecialchars($image->path) . "' height='200px'>";
                         }
                     ?><br><br>
+                    <?= ActiveForm::begin(['action' => 'order/view'])?>
+                        
+                    <?= ActiveForm::end()?>
+                    
                 </li>
     
             <?php endforeach; ?>

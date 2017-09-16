@@ -29,15 +29,15 @@ $this->title = $good->name;
             
             <div class='addImage'>
                 <div id='addedImage' style='display: none'>
-                    <?= $form->field($image, 'imageFile[]')->fileInput(['multiple'=>true])
-                                                           ->label('Выберите изображение')?><br>
-                    <?= $form->field($goods, 'imagesFile[]')->fileInput(['multiple'=>true])
-                        ->label('Выберите изображение')?>
-                        <input name="Good[images][1][Image][image-file]">
+                    <?php // $form->field($image, 'imageFile[]')->fileInput(['multiple'=>true])
+                             //                              ->label('Выберите изображение')?><br>
+                    <?php // $form->field($goods, 'imagesFile[]')->fileInput(['multiple'=>true])
+                        //->label('Выберите изображение')?>
+                        <!--<input name="Good[images][1][Image][image-file]">
                         <input name="Good[images][1][Image][descripttion]">
-                    <br>
-                    <?= $form->field($image, 'imageDescription[]')->textInput(['multiple'=>true])
-                                                                  ->label('Введите описание изображения')?><br>
+                    <br>-->
+                    <?php //$form->field($image, 'imageDescription[]')->textInput(['multiple'=>true])
+                            //                                      ->label('Введите описание изображения')?><br>
                 </div>
             </div>
     
