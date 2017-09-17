@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Good;
 use app\models\Image;
+use app\models\User;
 use yii\web\Controller;
 use yii\data\Pagination;
 use ItForFree\FileUploader;
@@ -17,6 +18,12 @@ class GoodController extends Controller
      */
     public function actionIndex()
     {
+        // Проверка работы связанных данных
+//        $User = User::findOne(['id' => Yii::$app->user->identity->id]);
+//        $orderId = $User->order;
+//        echo "<pre>"; print_r($orderId); echo "</pre>"; echo "<br><br>";
+//        echo "<pre>"; print_r($orderId->id); echo "</pre>";
+        
         $goods = Good::find(); 
 
         $pagination = new Pagination([
@@ -49,7 +56,7 @@ class GoodController extends Controller
                 && $good->validate()
                 && $good->save()){
                 
-                $additionalPath = "basic/web/images/goods/" . $good->id;
+                $additionalPath = "/images/goods/" . $good->id;
                 $uploadedFiles = (new FileUploader())->uploadToRelativePath($_FILES, '', $additionalPath);
                 $pathArray = [];
                 foreach ($uploadedFiles as $image) {

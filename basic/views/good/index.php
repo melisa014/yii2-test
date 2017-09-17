@@ -24,18 +24,20 @@ $this->title = "Все товары";
         <ul id="headlines">
             <?php foreach($goods as $good) : ?>
                 <li>
-                    <h2><?= Html::a($good->name, ['good/view', 'goodId' =>  $good->id]) ?></h2>
-                    <span class="summary">Цена: <?= $good->price ?> р.</span><br>
-                    <span class="summary">В наличии: <?= $good->available ?> шт.</span><br>
-                    
-                <!-- Вывод картинок -->
-                    <?php foreach ($good->images as $image) {
-                            echo "img src='web/uploads/" . htmlspecialchars($image->path) . "' height='200px'>";
-                        }
-                    ?><br><br>
-                    
-                    <?= Yii::$app->session->getFlash('correction success'); ?>
-                    <?= Yii::$app->session->getFlash('correction error'); ?>
+                    <div class='goodList'>
+                        <h2><?= Html::a($good->name, ['good/view', 'goodId' =>  $good->id]) ?></h2>
+                        <span class="summary">Цена: <?= $good->price ?> р.</span><br>
+                        <span class="summary">В наличии: <?= $good->available ?> шт.</span><br>
+
+                    <!-- Вывод картинок -->
+                        <?php foreach ($good->images as $image) {
+                                echo "img src='web/uploads/" . htmlspecialchars($image->path) . "' height='200px'>";
+                            }
+                        ?><br><br>
+                   
+                        <?= Yii::$app->session->getFlash('correction success'); ?>
+                        <?= Yii::$app->session->getFlash('correction error'); ?>
+                    </div>
                     
                     <?php $form = ActiveForm::begin(['action' => ['order/manage']])?>
                         <?= $form->field($good, 'number')->label('Количество товара') ?>

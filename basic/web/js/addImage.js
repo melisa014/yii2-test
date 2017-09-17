@@ -46,7 +46,6 @@ function showFormToAddImage()
         console.log(form);
         $('div.addImage').append(form);
         $('div.addImage :last-child').fadeIn(500);
-//        event.preventDefault()
         return false;
     });
 }
