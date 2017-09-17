@@ -49,17 +49,17 @@ class GoodController extends Controller
                 && $good->validate()
                 && $good->save()){
                 
-//                $additionalPath = "basic/web/images/goods/" . $good->id;
-//                $uploadedFiles = (new FileUploader())->uploadToRelativePath($_FILES, '', $additionalPath);
-//                $pathArray = [];
-//                foreach ($uploadedFiles as $image) {
-//                    $pathArray[] = $image['filepath'];
-//                }
-//                $image->path = $pathArray;
-////              
-//                $image->load(Yii::$app->request->post());
-//                $image->goodId = $good->id;
-//                $image->save();
+                $additionalPath = "basic/web/images/goods/" . $good->id;
+                $uploadedFiles = (new FileUploader())->uploadToRelativePath($_FILES, '', $additionalPath);
+                $pathArray = [];
+                foreach ($uploadedFiles as $image) {
+                    $pathArray[] = $image['filepath'];
+                }
+                $image->path = $pathArray;
+//              
+                $image->load(Yii::$app->request->post());
+                $image->goodId = $good->id;
+                $image->save();
                 
                 Yii::$app->getSession()->setFlash('create success', 'Запись успешно создана!');
                 return $this->redirect(['good/view', 'goodId' => $good->id]);

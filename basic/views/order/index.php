@@ -6,7 +6,7 @@ use yii\widgets\GridView;
 $this->title = 'Мой заказ';
 ?>
 
-<div class="order-view">
+<div class="order-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     

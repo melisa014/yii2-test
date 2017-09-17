@@ -50,15 +50,26 @@ class OrderController extends Controller
     public function actionManage()
     {
         //Проверяем наличие заказа у данного полдьзователя, если его нет, то создаём
-        if(!(new Order)->isUserOrder()){
-            $Order = (new Order)->insert(true, ['userId' => Yii::$app->user->identity->id]);
+        $Order = new Order();
+        if(!$Order->isUserOrder()){
+//            $Order = (new Order)->insert(true, ['userId' => Yii::$app->user->identity->id]);
+            $Order->userId = Yii::$app->user->identity->id;
+            $Order->save();
         }
         
         //Переводим товары в статус зарезервированных
         $Correction = new Correction();
-        if($Correction->load(Yii::$app->request->post())) {
-            $Correction->updateUserGoodsTransaction();
+        if($Correction->load(Yii::$app->request->post()) 
+                && $Correction->updateUserGoodsTransaction()) {
+            Yii::$app->getSession()->setFlash('correction access', 'Товар добавлен в корзину!');
+            return Yii::$app->response->redirect(['good/index']);
         }
+        
+        //Если коррекция не прошла выводим сообщение об ошибке
+        Yii::$app->getSession()->setFlash('correction error', 'Произошла ошибка! Товар не добавлен.');
+        return Yii::$app->response->redirect(['good/index']);
+        
+        
     }
     
     public function actionDelete()

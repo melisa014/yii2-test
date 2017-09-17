@@ -22,8 +22,8 @@ class Image extends ActiveRecord
     {
         return [
            // [['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
-            ['image-file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
-            [['description'], 'safe'],
+//            ['image-file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+//            [['description'], 'safe'],
         ];
     }
     

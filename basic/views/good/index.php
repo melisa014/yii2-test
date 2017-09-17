@@ -33,6 +33,10 @@ $this->title = "Все товары";
                             echo "img src='web/uploads/" . htmlspecialchars($image->path) . "' height='200px'>";
                         }
                     ?><br><br>
+                    
+                    <?= Yii::$app->session->getFlash('correction success'); ?>
+                    <?= Yii::$app->session->getFlash('correction error'); ?>
+                    
                     <?php $form = ActiveForm::begin(['action' => ['order/manage']])?>
                         <?= $form->field($good, 'number')->label('Количество товара') ?>
                         <?= Html::hiddenInput('goodId', $good->id) ?>
