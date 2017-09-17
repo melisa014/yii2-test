@@ -9,6 +9,10 @@ use yii\db\ActiveRecord;
  */
 class Good extends ActiveRecord
 {
+    
+    public $number;
+
+
     public static function tableName()
     {
         return 'goods';
@@ -45,7 +49,7 @@ class Good extends ActiveRecord
         return $this->hasMany(Image::className(), ['goodId' => 'id']);
     }
     
-     public function getCorrectios()
+     public function getCorrections()
     {
         return $this->hasMany(Correction::className(), ['goodId' => 'id']);
     }

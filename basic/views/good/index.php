@@ -33,9 +33,11 @@ $this->title = "Все товары";
                             echo "img src='web/uploads/" . htmlspecialchars($image->path) . "' height='200px'>";
                         }
                     ?><br><br>
-                    <?= ActiveForm::begin(['action' => 'order/view'])?>
-                        
-                    <?= ActiveForm::end()?>
+                    <?php $form = ActiveForm::begin(['action' => ['order/manage']])?>
+                        <?= $form->field($good, 'number')->label('Количество товара') ?>
+                        <?= Html::hiddenInput('goodId', $good->id) ?>
+                        <?= Html::submitButton('Заказать') ?>
+                    <?php ActiveForm::end()?>
                     
                 </li>
     
